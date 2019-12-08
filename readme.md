@@ -13,17 +13,17 @@
 4. Есть одна тонкость - необходимо проверить параметр SELINUX /etc/selinux/config (в новых системах). Нужно заменить строку SELINUX=enforcing на SELINUX=disabled. В противном случае после смены пароля и перезагрузки получим неприятную ситуацию - при вводе логина и пароля будет сообщение Login incorrect
 
 a) Если SELINUX еще не выключен и в параметрах загрузки оставлен параметр 'ro' (read-only), то необходимо ввести следующие команды:
-# mount -o remount,rw /
-# rpm --setperms `rpm -qa`
-# passwd
+mount -o remount,rw /
+rpm --setperms `rpm -qa`
+passwd
 Enter new password: (вводим новый пароль)
 Repeat... (повторяем новый пароль)
-# vi /etc/selinux/config (меняем SELINUX=enforcing на SELINUX=disabled)
-# sync
-# mount -o remount,ro /
+vi /etc/selinux/config (меняем SELINUX=enforcing на SELINUX=disabled)
+sync
+mount -o remount,ro /
 
 b) Если SELINUX  уже выключен ранее и в параметрах загрузки параметр 'ro' заменен на 'rw', то для смены пароля достаточно одной команды:
-# passwd
+passwd
 Enter new password: (вводим новый пароль)
 Repeat... (повторяем новый пароль)
 
@@ -34,32 +34,32 @@ Repeat... (повторяем новый пароль)
 1. Выполняем п.1 и п.2 варианта 1
 
 2. В конце строки добавляем параметр rd.break. Для выхода и продолжения загрузки нажимаем ctrl-x. В определенный момент загрузка системы завершится с появлением строки switch_root:/#. Необходимо ввести следующую команду:
-# chroot /sysroot
+chroot /sysroot
 
 3. Появится строка sh-4.2# и можно вводить команды для смены пароля:
-# passwd
+passwd
 Enter new password: (вводим новый пароль)
 Repeat... (повторяем новый пароль)
 
 4. Выполняем перезагрузку
-# exit
-# reboot
+exit
+reboot
 
 Вариант 3 входа без пароля
 
 1. Выполняем п.1 и п.2 варианта 1
 
 2. В конце строки добавляем параметр init=/sysroot/bin/sh. Для выхода и продолжения загрузки нажимаем ctrl-x. В определенный момент загрузка системы завершится с появлением строки :/#. Необходимо ввести следующую команду:
-# chroot /sysroot
+chroot /sysroot
 
 3. строка останется такой же :/#, но уже можно вводить команду для смены пароля:
-# passwd
+passwd
 Enter new password: (вводим новый пароль)
 Repeat... (повторяем новый пароль)
 
 4. Выполняем перезагрузку
-# exit
-# reboot
+exit
+reboot
 
 
 Решение переименовывания Volume Group в LVM
