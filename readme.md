@@ -104,7 +104,7 @@
 		[root@lvm vagrant]# vi /boot/grub2/grub.cfg  
 		[root@lvm vagrant]# cat /boot/grub2/grub.cfg  
 	...  
-	`### BEGIN /etc/grub.d/10_linux ###`
+	`### BEGIN /etc/grub.d/10_linux ###`  
 	menuentry 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-b60e9498-0baa-4d9f-90aa-069048217fee' {  
 	load_video  
 	set gfxpayload=keep  
@@ -120,21 +120,21 @@
 	linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/OtusRoot-LogVol00 ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=OtusRoot/LogVol00 rd.lvm.lv=OtusRoot/LogVol01 rhgb quiet  
 	initrd16 /initramfs-3.10.0-862.2.3.el7.x86_64.img  
 	}  
-	if [ "x$default" = 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' ]; then default='Advanced options for CentOS Linux>CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;
-	`### END /etc/grub.d/10_linux ###`
+	if [ "x$default" = 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' ]; then default='Advanced options for CentOS Linux>CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;  
+	`### END /etc/grub.d/10_linux ###`  
 	...
 
 8. Пересоздаем initrd image, чтобы он знал новое название Volume Group  
 		[root@lvm vagrant]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)  
-	Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64
-	...
-	*** Creating image file ***
-	*** Creating image file done ***
-	*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+	Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64  
+	...  
+	*** Creating image file ***  
+	*** Creating image file done ***  
+	*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***  
 
 9. Перезагружаемся и проверяем новое значение Volume Group  
 		[root@lvm vagrant]# vgs  
-	VG       #PV #LV #SN Attr   VSize   VFree
-	OtusRoot   1   2   0 wz--n- <38.97g    0 
+	VG       #PV #LV #SN Attr   VSize   VFree  
+	OtusRoot   1   2   0 wz--n- <38.97g    0  
 
 
