@@ -70,12 +70,9 @@
 		vi /etc/selinux/config (меняем SELINUX=enforcing на SELINUX=disabled)  
 
 3.  Посмотрим текущее значение Volume Group  
-		[root@lvm vagrant]# vgs
-
-<div>
+		[root@lvm vagrant]# vgs  
 	# VG         #PV #LV #SN Attr   VSize   VFree  
 	# VolGroup00   1   2   0 wz--n- <38.97g    0  
-</div>
 
 4. Переименуем Volume Group  
 		[root@lvm vagrant]# vgrename VolGroup00 OtusRoot  
