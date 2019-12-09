@@ -45,7 +45,7 @@
 		exit  
 		reboot  
 
-Вариант 3 входа без пароля
+## Вариант 3 входа без пароля
 
 1. Выполняем п.1 и п.2 варианта 1
 
@@ -136,5 +136,69 @@
 		[root@lvm vagrant]# vgs  
 	VG       #PV #LV #SN Attr   VSize   VFree  
 	OtusRoot   1   2   0 wz--n- <38.97g    0  
+
+# Решение по добавлению модуля в initrd
+
+1. Создаем папку 01test в каталоге хранения модулей (/usr/lib/dracut/modules.d/).  
+
+		[root@lvm vagrant]# mkdir /usr/lib/dracut/modules.d/01test  
+		[root@lvm vagrant]# ls /usr/lib/dracut/modules.d  
+	00bash               80cms                 90qemu          97biosdevname  
+	00systemd-bootchart  90bcache              91crypt-gpg     98ecryptfs  
+	01test               90btrfs               91crypt-loop    98pollcdrom  
+	03modsign            90crypt               95dasd          98selinux  
+	03rescue             90dm                  95dasd_mod      98syslog  
+	04watchdog           90dmraid              95debug         98systemd  
+	05busybox            90dmsquash-live       95fstab-sys     98usrmount  
+	05nss-softokn        90dmsquash-live-ntfs  95resume        99base  
+	10i18n               90kernel-modules      95rootfs-block  99fs-lib  
+	30convertfs          90lvm                 95terminfo      99img-lib  
+	45url-lib            90mdraid              95udev-rules    99shutdown  
+	50drm                90multipath           95virtfs  
+	50plymouth           90multipath-hostonly  95zfcp  
+
+2. Перейдем в созданную папку 01test и создадим в ней скрипт module-setup.sh, который будет  устанавливать модуль и вызывать скрипт test.sh (скопируем в файл текст скрипта любезно предоставленного в методичке)  
+		[root@lvm modules.d]# cd 01test  
+		[root@lvm 01test]# > module-setup.sh   
+		[root@lvm 01test]# vi module-setup.sh   
+		[root@lvm 01test]# cat module-setup.sh   
+	'#!/bin/bash  
+
+	check() {  
+	    return 0  
+	}  
+
+	depends() {  
+	    return 0  
+	}  
+
+	install() {  
+	    inst_hook cleanu  p 00 "${moddir}/test.sh"
+	}'
+
+3. Создадим в каталоге второй скрипт test.sh (также скопируем в файл текст скрипта из методички)  
+		[root@lvm 01test]# > test.sh  
+		[root@lvm 01test]# vi test.sh  
+		[root@lvm 01test]# cat test.sh  
+	'#!/bin/bash  
+
+	exec 0<>/dev/console 1<>/dev/console 2<>/dev/console  
+	cat <<'msgend'  
+	Hello! You are in dracut module!  
+	 ___________________  
+	< I'm dracut module >  
+	 -------------------  
+	   \  
+	    \  
+		.--.  
+	       |o_o |  
+	       |:_/ |  
+	      //   \ \  
+	     (|     | )  
+	    /'\_   _/`\  
+	    \___)=(___/  
+	msgend  
+	sleep 10  
+	echo " continuing...."  '
 
 
