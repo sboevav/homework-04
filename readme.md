@@ -195,4 +195,16 @@
 	*** Creating image file done ***  
 	*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***  
 
+5. Проверим, загружен ли в образ модуль test   
+		[root@lvm 01test]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep test  
+	test  
+
+6. Выполняем перезагрузку, вручную отключаем опции загрузки rghb и quiet, нажимаем ctrl-x и следим за загрузкой. На определенном этапе видим выполнение скрипта test.sh  
+
+7. Пробуем отключить опции загрузки, исправив для этого файл /boot/grub2/grub.cfg  
+		[vagrant@lvm ~]$ sudo su  
+		[root@lvm vagrant]# vi /boot/grub2/grub.cfg  
+
+8. Снова выполняем перезагрузку и следим за загрузкой. На определенном этапе опять видим выполнение скрипта test.sh  
+
 
