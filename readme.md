@@ -187,3 +187,12 @@
 	echo " continuing...."  
 
 
+4. Запускаем сборку образа initrd  
+		[root@lvm 01test]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)  
+	Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64  
+	...  
+	*** Creating image file ***  
+	*** Creating image file done ***  
+	*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***  
+
+
