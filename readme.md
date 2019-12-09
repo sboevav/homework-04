@@ -140,29 +140,14 @@
 # Решение по добавлению модуля в initrd
 
 1. Создаем папку 01test в каталоге хранения модулей (/usr/lib/dracut/modules.d/).  
-
 		[root@lvm vagrant]# mkdir /usr/lib/dracut/modules.d/01test  
-		[root@lvm vagrant]# ls /usr/lib/dracut/modules.d  
-	00bash               80cms                 90qemu          97biosdevname  
-	00systemd-bootchart  90bcache              91crypt-gpg     98ecryptfs  
-	01test               90btrfs               91crypt-loop    98pollcdrom  
-	03modsign            90crypt               95dasd          98selinux  
-	03rescue             90dm                  95dasd_mod      98syslog  
-	04watchdog           90dmraid              95debug         98systemd  
-	05busybox            90dmsquash-live       95fstab-sys     98usrmount  
-	05nss-softokn        90dmsquash-live-ntfs  95resume        99base  
-	10i18n               90kernel-modules      95rootfs-block  99fs-lib  
-	30convertfs          90lvm                 95terminfo      99img-lib  
-	45url-lib            90mdraid              95udev-rules    99shutdown  
-	50drm                90multipath           95virtfs  
-	50plymouth           90multipath-hostonly  95zfcp  
 
 2. Перейдем в созданную папку 01test и создадим в ней скрипт module-setup.sh, который будет  устанавливать модуль и вызывать скрипт test.sh (скопируем в файл текст скрипта любезно предоставленного в методичке)  
 		[root@lvm modules.d]# cd 01test  
 		[root@lvm 01test]# > module-setup.sh   
 		[root@lvm 01test]# vi module-setup.sh   
 		[root@lvm 01test]# cat module-setup.sh   
-	'#!/bin/bash  
+	 #!/bin/bash  
 
 	check() {  
 	    return 0  
@@ -174,7 +159,7 @@
 
 	install() {  
 	    inst_hook cleanu  p 00 "${moddir}/test.sh"
-	}'
+	}
 
 3. Создадим в каталоге второй скрипт test.sh (также скопируем в файл текст скрипта из методички)  
 		[root@lvm 01test]# > test.sh  
