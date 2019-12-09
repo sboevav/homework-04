@@ -73,8 +73,8 @@
 		[root@lvm vagrant]# vgs
 
 <div>
-	VG         #PV #LV #SN Attr   VSize   VFree
-	VolGroup00   1   2   0 wz--n- <38.97g    0
+	# VG         #PV #LV #SN Attr   VSize   VFree  
+	# VolGroup00   1   2   0 wz--n- <38.97g    0  
 </div>
 
 4. Переименуем Volume Group  
