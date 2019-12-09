@@ -71,30 +71,23 @@
 
 3.  Посмотрим текущее значение Volume Group  
 		[root@lvm vagrant]# vgs  
-
-<div>
-	VG         #PV #LV #SN Attr   VSize   VFree
-	VolGroup00   1   2   0 wz--n- <38.97g    0
-</div>
+	VG         #PV #LV #SN Attr   VSize   VFree  
+	VolGroup00   1   2   0 wz--n- <38.97g    0  
 
 4. Переименуем Volume Group  
 		[root@lvm vagrant]# vgrename VolGroup00 OtusRoot  
-	Volume group "VolGroup00" successfully renamed to "OtusRoot"
+	Volume group "VolGroup00" successfully renamed to "OtusRoot"  
 
 5. Изменим значение VolGroup00 на OtusRoot в файле /etc/fstab  
 		[root@lvm vagrant]# vi /etc/fstab  
 		[root@lvm vagrant]# cat  /etc/fstab  
-	#
-	# /etc/fstab
-	# Created by anaconda on Sat May 12 18:50:26 2018
-	#
-	# Accessible filesystems, by reference, are maintained under '/dev/disk'
-	# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
-	#
+	/etc/fstab
+	Created by anaconda on Sat May 12 18:50:26 2018
+	Accessible filesystems, by reference, are maintained under '/dev/disk'
+	See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 	/dev/mapper/OtusRoot-LogVol00 /                       xfs     defaults        0 0
 	UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
 	/dev/mapper/OtusRoot-LogVol01 swap                    swap    defaults        0 0
-	[root@lvm vagrant]# 
 
 6. Изменим значение VolGroup00 на OtusRoot в файле /etc/default/grub  
 		[root@lvm vagrant]# vi /etc/default/grub  
