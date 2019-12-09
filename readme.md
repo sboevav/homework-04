@@ -162,10 +162,10 @@
 	}
 
 3. Создадим в каталоге второй скрипт test.sh (также скопируем в файл текст скрипта из методички)  
-		[root@lvm 01test]# > test.sh  
-		[root@lvm 01test]# vi test.sh  
-		[root@lvm 01test]# cat test.sh  
-	'#!/bin/bash  
+		[root@lvm 01test]# > test.sh    
+		[root@lvm 01test]# vi test.sh    
+		[root@lvm 01test]# cat test.sh    
+	 #!/bin/bash  
 
 	exec 0<>/dev/console 1<>/dev/console 2<>/dev/console  
 	cat <<'msgend'  
@@ -177,13 +177,13 @@
 	    \  
 		.--.  
 	       |o_o |  
-	       |:_/ |  
+	       |\_/ |  
 	      //   \ \  
 	     (|     | )  
 	    /'\_   _/`\  
 	    \___)=(___/  
 	msgend  
 	sleep 10  
-	echo " continuing...."  '
+	echo " continuing...."  
 
 
